@@ -6,7 +6,7 @@ class SessionForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
+        this.state =  {
             email: "",
             password: ""
         };
@@ -20,7 +20,7 @@ class SessionForm extends React.Component {
 
     update(field){
         return e => (
-            this.state[field] = e.target.value
+            this.setState({[field]: e.target.value})
         );
     }
 
@@ -43,8 +43,10 @@ class SessionForm extends React.Component {
                 </label>
                 <br/>
                 <label> Password:
-                    <input type="text" value={this.state.password} onChange={this.update("email")}/>
+                    <input type="text" value={this.state.password} onChange={this.update("password")}/>
                 </label>
+                <br/>
+                <input type="submit" value={`${this.props.formType}!!`}/>
                 <br/>
                 <label>Link Goes Here:
                     {this.linkType()}
