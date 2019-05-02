@@ -24,19 +24,25 @@ class SessionForm extends React.Component {
         );
     }
 
-    linkType(){
-        if(this.props.formType === "login"){
-            return <Link to={'/signup'} value='signup'>Signup</Link>
-        } else {
-            return < Link to={'/login'} value='login' > Login</Link>
-        }
-    };
-
     render(){
+
+        let linkType = '/signup';
+        let linkValue = 'Signup';
+
+        if(this.props.formType === 'signup'){
+            linkType = '/login';
+            linkValue = 'Login';
+        }
 
         return (
         <div>
-            <h2>Feel free to {this.props.formType}</h2>
+            <h3>Feel free to {this.props.formType}</h3>
+            <label>Or:
+                 < Link to={linkType}> {linkValue}</Link>
+            </label>
+                <br />
+                <br />
+                <br />
             <form onSubmit={this.handleSubmit}>
                 <label> Email:
                     <input type="text" value={this.state.email} onChange={this.update("email")}/>
@@ -48,9 +54,8 @@ class SessionForm extends React.Component {
                 <br/>
                 <input type="submit" value={`${this.props.formType}!!`}/>
                 <br/>
-                <label>Link Goes Here:
-                    {this.linkType()}
-                </label>
+                <br/>
+           
             </form>
         </div>
         );
