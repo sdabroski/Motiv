@@ -14,12 +14,25 @@ class Splash extends React.Component{
                 );
         } else {
             return (
-                <>
-                    <h1>NOw i'm logged out!</h1>
-                    {/* <h1> you're NOT logged in </h1>
-                    <Link to={'/signup'} value='signup'>Signup</Link>
-                    <Link to={'/login'} value='login' >Login</Link> */}
-                </>
+                    <div className="splash-outer">
+                        <div class=".text-container">
+                            <h1 id="header-text">The #1 app for runners and cyclists</h1>
+                        </div>
+                        <div>
+                            <div>
+                                <img id= "phone-image" src="https://bit.ly/2Wjmiil"></img>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                        
+                        
+                        <div id="login-placeholder"></div>
+
+
+                    </div>
+                    
             )
         }
     }
