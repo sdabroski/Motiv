@@ -34,33 +34,51 @@ class SessionForm extends React.Component {
             linkValue = 'Login';
         }
 
-        return (
-        <div>
-            <h3>Feel free to {this.props.formType}</h3>
-            <label>Or:
-                 < Link to={linkType}> {linkValue}</Link>
-            </label>
-                <br />
-                <br />
-                <br />
-            <form onSubmit={this.handleSubmit}>
-                <label> Email:
-                    <input type="text" value={this.state.email} onChange={this.update("email")}/>
-                </label>
-                <br/>
-                <label> Password:
-                    <input type="text" value={this.state.password} onChange={this.update("password")}/>
-                </label>
-                <br/>
-                <input type="submit" value={`${this.props.formType}!!`}/>
-                <br/>
-                <br/>
-           
-            </form>
-        </div>
-        );
-    }
+        if(this.props.formType === 'login'){
+            return (
+                <div id="login-page">
+                    <div id="login-container">
+                        <div id="login-header">
+                            Log In
+                        </div>
+                        <div id="login-main">
+                            <Link to="/" className="splash-signup-button" id="splash-demo-button">Demo Log In</Link>
+                            <Link to="/" className="splash-signup-button" id="splash-demo-button">Sign Up Using Email</Link>
+                            <div id="login-or-divider">
+                                Or log in with email
+                            </div>
+                            <form id="login-form" onSubmit={this.handleSubmit}>
+                                <input 
+                                        className="login-input"
+                                        type="text" 
+                                        value={this.state.email} 
+                                        placeholder="Your Email" 
+                                        onChange={this.update("email")} 
+                                />
+                                <br/>
+                                <input 
+                                    className="login-input"
+                                    type="password" 
+                                    value={this.state.password} 
+                                    placeholder="Password" 
+                                    onChange={this.update("password")} 
+                                />
+                                <br />
+                                <input type="submit" value="Log In" id="submit-button" className="login-input" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
 
+                <div>
+                    this is your signup page
+                </div>
+            );
+        }
+    }
 }
 
 

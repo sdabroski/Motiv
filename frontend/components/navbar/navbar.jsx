@@ -35,7 +35,7 @@ class Navbar extends React.Component {
                 <div className="navbar">
                     <div className="navbar-left">
                         <div className="nav-element">
-                            <Link to={'/'}><img id="logo" src="https://bit.ly/2PKQnVf" /></Link>
+                            <Link id="logo" to={'/'}><img id="logo" src={window.motiv}/></Link>
                         </div>
                         
                     </div>
