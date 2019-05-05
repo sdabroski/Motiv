@@ -13,12 +13,23 @@ class SessionForm extends React.Component {
             last_name: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.demoLogin = this.demoLogin.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
         // this.props.history.push('/feed');
         this.props.processForm(this.state)
+    }
+
+    demoLogin(){
+        let demoState = {
+            email: "stefan@wave.com",
+            password: "password",
+            first_name: "Stefan",
+            last_name: "Dabroski"
+        };
+        this.props.demoSubmit(demoState)
     }
 
     update(field){
@@ -45,7 +56,7 @@ class SessionForm extends React.Component {
                             <p>Log In</p>
                         </div>
                         <div id="login-main">
-                            <Link to="/" className="login-button" id="login-demo-button">Demo Log In</Link>
+                            <button className="login-button" id="login-demo-button" onClick={() => this.demoLogin()}> Demo Log In</button>
                             <Link to="/signup" className="login-button" id="splash-login-button">Sign Up Using Email</Link>
                             <div id="login-or-divider">
                                 <p>Or log in with email</p>
@@ -84,7 +95,7 @@ class SessionForm extends React.Component {
                             <p>Join Motiv today, <br/> it's Free.</p>
                         </div>
                         <div id="signup-main">
-                            <Link to="/" className="signup-button" id="signup-demo-button">Demo Log In</Link>
+                            <button className="login-button" id="login-demo-button" onClick={() => this.demoLogin()}> Demo Log In</button>
                             <div id="signup-or-divider">
                                 <p className="signup-disclaimer-text">or sign up with your email address</p>
                             </div>

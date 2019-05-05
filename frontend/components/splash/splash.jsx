@@ -1,8 +1,26 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Map from '../map/map';
 
 
 class Splash extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.demoLogin = this.demoLogin.bind(this);
+    }
+
+    demoLogin() {
+        let demoState = {
+            email: "stefan@wave.com",
+            password: "password",
+            first_name: "Stefan",
+            last_name: "Dabroski"
+        };
+        this.props.demoSubmit(demoState)
+    }
+
+
     render(){
         
         if(this.props.currentUser){
@@ -10,6 +28,7 @@ class Splash extends React.Component{
                 <> 
                     <h1> Welcome, {this.props.currentUser.email} </h1>
                     <button onClick={() => this.props.logout()}>Logout</button>
+                    <Map />
                 </>
                 );
         } else {
@@ -23,7 +42,7 @@ class Splash extends React.Component{
                                 <img id= "phone-image" src="https://bit.ly/2Wjmiil"></img>
                             </div>
                             <div id="splash-button-container">
-                                 <Link to="/" className="splash-signup-button" id="splash-demo-button">Demo Log In</Link>
+                                <button className="login-button" id="login-demo-button" onClick={() => this.demoLogin()}> Demo Log In</button>
                                  <Link to="/login" className="splash-signup-button" id="splash-login-button">Log In With Email</Link>
                                  <div id="or-divider">or</div> 
                                  <Link to="/signup" className="splash-signup-button" id="splash-signup-button">Sign Up</Link>
