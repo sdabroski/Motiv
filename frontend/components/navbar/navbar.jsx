@@ -6,18 +6,18 @@ class Navbar extends React.Component {
 
         
 
-        if (this.props.currentUser) {
-            return (
-                <>
-                </>
-            );
-        } else {
+        // if (this.props.currentUser) {
+        //     return (
+        //         <>
+        //         </>
+        //     );
+        // } else {
 
             let navButtonID;
             let navButtonText;
             let navButtonDestination;
 
-            if(this.props.currentURL === "/"){
+            if(this.props.currentURL === "/" || this.props.currentURL === "/feed"){
                 navButtonText = "Log In";
                 navButtonID = "splash";
                 navButtonDestination = "/login"
@@ -35,7 +35,7 @@ class Navbar extends React.Component {
                 <div className="navbar">
                     <div className="navbar-left">
                         <div className="nav-element">
-                            <Link id="logo" to={'/'}><img id="logo" src={window.motiv}/></Link>
+                            <Link to='/' id="logo" ><img id="logo" src={window.motiv}/></Link>
                         </div>
                         
                     </div>
@@ -46,7 +46,7 @@ class Navbar extends React.Component {
                     </div>
                 </div>
             );
-        }
+        // }
     }
 }
 

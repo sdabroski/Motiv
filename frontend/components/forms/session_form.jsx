@@ -8,13 +8,16 @@ class SessionForm extends React.Component {
         super(props);
         this.state =  {
             email: "",
-            password: ""
+            password: "",
+            first_name: "",
+            last_name: ""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
+        // this.props.history.push('/feed');
         this.props.processForm(this.state)
     }
 
@@ -39,13 +42,13 @@ class SessionForm extends React.Component {
                 <div id="login-page">
                     <div id="login-container">
                         <div id="login-header">
-                            Log In
+                            <p>Log In</p>
                         </div>
                         <div id="login-main">
-                            <Link to="/" className="splash-signup-button" id="splash-demo-button">Demo Log In</Link>
-                            <Link to="/" className="splash-signup-button" id="splash-demo-button">Sign Up Using Email</Link>
+                            <Link to="/" className="login-button" id="login-demo-button">Demo Log In</Link>
+                            <Link to="/signup" className="login-button" id="splash-login-button">Sign Up Using Email</Link>
                             <div id="login-or-divider">
-                                Or log in with email
+                                <p>Or log in with email</p>
                             </div>
                             <form id="login-form" onSubmit={this.handleSubmit}>
                                 <input 
@@ -64,17 +67,68 @@ class SessionForm extends React.Component {
                                     onChange={this.update("password")} 
                                 />
                                 <br />
-                                <input type="submit" value="Log In" id="submit-button" className="login-input" />
+                                <input type="submit" value="Log In" id="submit-button" className="login-button" />
                             </form>
+                            <div className="login-disclaimer-text">
+                                <p>If you want to see the real Strava, <a className="disclaimer-link" href="https://www.strava.com/login">Click Here</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         } else {
             return (
-
-                <div>
-                    this is your signup page
+                <div id="signup-page">
+                    <div id="signup-container">
+                        <div id="signup-header">
+                            <p>Join Motiv today, <br/> it's Free.</p>
+                        </div>
+                        <div id="signup-main">
+                            <Link to="/" className="signup-button" id="signup-demo-button">Demo Log In</Link>
+                            <div id="signup-or-divider">
+                                <p className="signup-disclaimer-text">or sign up with your email address</p>
+                            </div>
+                            <form id="signup-form" onSubmit={this.handleSubmit}>
+                                <input
+                                    className="signup-input"
+                                    type="text"
+                                    value={this.state.email}
+                                    placeholder="Your Email"
+                                    onChange={this.update("email")}
+                                />
+                                <br />
+                                <input
+                                    className="signup-input"
+                                    type="text"
+                                    value={this.state.first_name}
+                                    placeholder="First Name"
+                                    onChange={this.update("first_name")}
+                                />
+                                <br />
+                                <input
+                                    className="signup-input"
+                                    type="text"
+                                    value={this.state.last_name}
+                                    placeholder="Last Name"
+                                    onChange={this.update("last_name")}
+                                />
+                                <br />
+                                <input
+                                    className="signup-input"
+                                    type="password"
+                                    value={this.state.password}
+                                    placeholder="Password"
+                                    onChange={this.update("password")}
+                                />
+                                <br />
+                                <input type="submit" value="Sign Up" id="signup-submit-button" className="signup-button" />
+                            </form>
+                            <br />
+                            <div className="signup-disclaimer-text">
+                                <p>If you want to see the real Strava, <a className="disclaimer-link" href="https://www.strava.com/login">Click Here</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         }

@@ -3,24 +3,24 @@
 // }
 
 
-#login-page {
-    background-image: image-url("login.jpg");
+#signup-page {
+    background-image: image-url("signup.jpg");
     height: 100vh;
     background-size: cover;
     display: flex;
     justify-content: center;
 }
 
-#login-container {
-    height: 574px;
+#signup-container {
+    height: 630px;
     width: 400px;
     background-color: rgba(0,0,0,0.75);
     margin: 60px 0px 0px 0px;
 }
 
-#login-header {
+#signup-header {
     font-size: 34px;
-    height: 80px;
+    height: 125px;
     font-family: $strava-fonts;
     color: white;
     background-color: rgba(0,0,0,0.5);
@@ -29,10 +29,11 @@
     align-items: center;
     align-content: center;
     font-weight: bold;
-    // text-align: center;
+    text-align: center;
+    line-height: 41px;
 }
 
-#login-or-divider {
+#signup-or-divider {
     height: 50px;
     color: white;
     font-family: $strava-fonts;
@@ -44,25 +45,24 @@
     flex-direction: row;
 }
 
-#login-or-divider > p {
+#signup-or-divider > p {
     text-align: center;
     margin: 2px 0 0 0;
 
 }
 
-#login-main {
+#signup-main {
     display: flex;
     flex-direction: column;
-    height: 574px;
 }
 
-#login-form {
+#signup-form {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    height: 300px;
 }
 
-.login-input {
+.signup-input {
     width: 300px;
     height: 40px;
     border-radius: 4px;
@@ -75,17 +75,17 @@
     border: 1px solid #666;
 }
 
-.login-input:focus {
+.signup-input:focus {
     background: #E1E1E3;
     color: 	#4e4d4d;
 }
 
-.login-form-item {
+.signup-form-item {
     display:flex;
     align-content: center;
 }
 
-.login-button {
+.signup-button {
     height: 40px;
     width: 301px;
     background: white;
@@ -104,13 +104,14 @@
     font-weight: bold;
 }
 
-#submit-button {
+#signup-submit-button {
     background-color: #FC4C01;
     color: white;
-    margin: 34px 0px 0px 0px;
+    margin: 4px 0px 0px 0px;
+    padding: 10px;
 }
 
-#login-demo-button {
+#signup-demo-button {
     color: white;
     background-color: #3b5998;
     font-weight: bold;
@@ -118,11 +119,11 @@
     margin: 50px 0 0 0;
 }
 
-.login-disclaimer-text {
+.signup-disclaimer-text {
     line-height: 1.71em;
     color: #99999e;
     font-family: $strava-fonts;
-    margin-top: 40px;
+    margin-top: -22px;
     text-align: center;
     font-size: 12px;
     line-height: 16px;
