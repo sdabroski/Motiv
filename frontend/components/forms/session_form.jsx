@@ -18,8 +18,12 @@ class SessionForm extends React.Component {
 
     handleSubmit(e){
         e.preventDefault();
-        // this.props.history.push('/feed');
         this.props.processForm(this.state)
+        // .then((user) => {
+        //     if(user.id){
+        //         this.props.history.push('/feed'))
+        //     }
+        // }
     }
 
     demoLogin(){

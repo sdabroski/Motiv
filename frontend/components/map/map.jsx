@@ -8,119 +8,140 @@ class Map extends React.Component{
 
     constructor(props){
         super(props)
-        this.locs = [];
-        this.placeMarker = this.placeMarker.bind(this);
+        this.state = {
+            elevation: 0,
+            time: 0,
+            distance: 0,
+            waypoints: []
+        }
+        // this.placeMarker = this.placeMarker.bind(this);
     }
 
-    placeMarker(latLng, map) {
-        let marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-        });
+    componentDidUpdate() {
+        this.createMap();
+    }
+
+    componentDidMount() {
+        this.createMap();
+    }
+
+    addWaypoint(latLng, map) {
+        let lat = latLng.lat();
+        let lng = latLng.lng();
+        
         map.panTo(latLng);
-        this.props.updateWaypoints(latLng)
-    }
 
-    placeMarker2(latLng, map) {
+        let updatedWaypoints = this.state.waypoints.slice(0);
+        updatedWaypoints.push({ lat: lat, lng: lng });
+        this.setState({waypoints: updatedWaypoints});
+    }
+    
+    addMarker(latLng, map) {
         let marker = new google.maps.Marker({
             position: latLng,
             map: map,
             icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
         });
-        map.panTo(latLng);
+        // map.panTo(latLng);
+        // this.props.updateWaypoints({lat: lat, lng: lng})
     }
 
-    componentDidUpdate() {
-        this.placeMarker2(this.props.waypoints[0], this.map)
-    }
-    
-    componentDidMount() {
+    routeStats(route) {
+        var totalDist = 0;
+        var totalTime = 0;
+        var myroute = result.routes[0];
+        for (i = 0; i < myroute.legs.length; i++) {
+            totalDist += myroute.legs[i].distance.value;
+            totalTime += myroute.legs[i].duration.value;
+        }
+        totalDist = totalDist / 1000
 
+        this.setState({time: totalTime })
+        this.setState({distance: totalDistance })
+        
+    }
+
+    createMap() {
         const mapDiv = ReactDOM.findDOMNode(this.refs.map)
-        // set the map to show SF
 
-        //use an array of these google maps LatLng objects in the waypoints[] key of the request object. A) Generate Array of LatLng objects corresponding to map clicks. 
-        //upon click, array[0] is set to origin, array[-1] is set to destination, all the others get iterated through in order.
+        //presets for testing
         let haight = new google.maps.LatLng(37.7699298, -122.4469157);
-        let oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-        let appAcademy = new google.maps.LatLng(37.802566, -122.405186);
-        let testWaypoint = {location: appAcademy}
+        // let oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
+        // let appAcademy = new google.maps.LatLng(37.802566, -122.405186);
+        // let testWaypoint = { location: appAcademy }
         //let testWaypoint2 = { location: {lat: 37.802566, lng: -122.405186}} this way works too :)
 
+        //define original map orientation
         const mapOptions = {
             center: haight,
             zoom: 14
         };
 
-
+        //create map
         this.map = new google.maps.Map(mapDiv, mapOptions);
 
-        
-
+        //setup directions display and directions routing
         let directionsDisplay = new google.maps.DirectionsRenderer({
             draggable: true,
             map: this.map
         });
-        // directionsDisplay.setMap(this.map)
-
+        // directionsDisplay.setMap(this.map) | alternate syntax
         let directionsService = new google.maps.DirectionsService();
 
-        let drawingManager = new google.maps.drawing.DrawingManager({
-            drawingMode: google.maps.drawing.OverlayType.MARKER,
-            drawingControl: true,
-            drawingControlOptions: {
-                position: google.maps.ControlPosition.TOP_CENTER,
-                drawingModes: ['marker']
-            },
-            markerOptions: { 
-                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png', 
-                draggable: true
-            }
-        });
+        //setup distanceMatrixService
+        let service = new google.maps.DistanceMatrixService();
 
-        drawingManager.setMap(this.map);
-
-        let request = {
-            origin: haight,
-            destination: oceanBeach,
-            optimizeWaypoints: false,
-            waypoints: [testWaypoint],
-            travelMode: google.maps.TravelMode["BICYCLING"]
-        };
-
-        directionsService.route(request, function (response, status) {
-            if (status == 'OK') {
-                directionsDisplay.setDirections(response);
-            }
-        });
-
-        // this.map.addListener('click', this.addLatLng)
-
+        //listener for clicks on map
         this.map.addListener('click', (e) => {
-            this.placeMarker(e.latLng, this.map);
+            this.addWaypoint(e.latLng, this.map);
         });
 
- 
+      
+        if(this.state.waypoints.length === 1) {
+            this.addMarker(this.state.waypoints[0], this.map)
 
- 
+        } else if(this.state.waypoints.length > 1) {
+            //request to be passed to directions service
+            let rawWaypoints = this.state.waypoints.slice(1, this.state.waypoints.length - 1);
+            let formattedWaypoints = [];
 
-        // let beachMarker = new google.maps.Marker({
-        //     position: { lat: 37.7758, lng: -122.435 },
-        //     map: this.map,
+            rawWaypoints.forEach(waypoint => {
+                formattedWaypoints.push({location: waypoint})
+            })
 
-            // icon: window.motiv
-        // });
+            let request = {
+                origin: this.state.waypoints[0],
+                destination: this.state.waypoints[this.state.waypoints.length - 1],
+                optimizeWaypoints: false,
+                waypoints: formattedWaypoints,
+                travelMode: google.maps.TravelMode["BICYCLING"]
+            };
+    
+            directionsService.route(request, (response, status) => {
+                if (status == 'OK') {
+                    directionsDisplay.setDirections(response);
+                    debugger
+                    this.routeStats(response.routes[0]);
+                }
+            });
+
+        }
+
+      
     }
-
-  
     
     render(){
         return (
-            <div id="map" ref="map"/>
+            <div>
+                <div id="map" ref="map"/>
+                <br/>
+                <br/>
+                <div></div>
+            </div>
         );
     }
 
-
+//end of component
 }
 
 
@@ -128,3 +149,17 @@ export default Map;
 
 
 
+  //no longer need drawing manager because of click listener
+        // let drawingManager = new google.maps.drawing.DrawingManager({
+        //     drawingMode: google.maps.drawing.OverlayType.MARKER,
+        //     drawingControl: true,
+        //     drawingControlOptions: {
+        //         position: google.maps.ControlPosition.TOP_CENTER,
+        //         drawingModes: ['marker']
+        //     },
+        //     markerOptions: { 
+        //         icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png', 
+        //         draggable: true
+        //     }
+        // });
+        // drawingManager.setMap(this.map);
