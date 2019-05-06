@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Map from '../map/map';
+import MapContainer from '../map/map_container';
 
 
 class Splash extends React.Component{
@@ -28,7 +29,7 @@ class Splash extends React.Component{
                 <> 
                     <h1> Welcome, {this.props.currentUser.email} </h1>
                     <button onClick={() => this.props.logout()}>Logout</button>
-                    <Map />
+                    <MapContainer />
                 </>
                 );
         } else {

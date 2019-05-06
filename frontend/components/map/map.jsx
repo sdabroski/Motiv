@@ -9,6 +9,7 @@ class Map extends React.Component{
     constructor(props){
         super(props)
         this.locs = [];
+        this.placeMarker = this.placeMarker.bind(this);
     }
 
     placeMarker(latLng, map) {
@@ -16,11 +17,21 @@ class Map extends React.Component{
             position: latLng,
             map: map
         });
-        debugger
         map.panTo(latLng);
-        this.locs.push(marker.position);
+        this.props.updateWaypoints(latLng)
+    }
 
+    placeMarker2(latLng, map) {
+        let marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+            icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+        });
+        map.panTo(latLng);
+    }
 
+    componentDidUpdate() {
+        this.placeMarker2(this.props.waypoints[0], this.map)
     }
     
     componentDidMount() {

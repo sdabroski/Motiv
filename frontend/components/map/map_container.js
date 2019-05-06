@@ -1,18 +1,18 @@
 import Map from './map';
 import { connect } from 'react-redux';
 import merge from 'lodash/merge';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { receiveWaypoint } from '../../reducers/waypoints_reducer';
 
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        currentUser: state.entities.users[state.session.id],
-        currentURL: ownProps.location.pathname
-    })
+        waypoints: state.entities.waypoints
+    });
 };
 
 const mapDispatchToProps = dispatch => ({
-
+    updateWaypoints: waypoint => dispatch(receiveWaypoint(waypoint))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar))
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
