@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { newRoute } from '../../util/routes_api_util';
+import { withRouter } from 'react-router-dom';
 
 
 class Map extends React.Component{
@@ -15,6 +16,7 @@ class Map extends React.Component{
             distance: 0,
             waypoints: [],
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
         // this.placeMarker = this.placeMarker.bind(this);
     }
 
@@ -26,7 +28,7 @@ class Map extends React.Component{
         //create new Route
         this.props.newRoute(this.state).then(route => {
             
-            this.state.waypoints.forEach((waypoint, i) => {
+            this.state.waypoints.map((waypoint, i) => {
                 
                 //sets a new key value pair for the waypoint using the route id we just created
                 waypoint.route_id = route.id;
@@ -34,8 +36,9 @@ class Map extends React.Component{
                 // waypoint.lat = waypoint.
                 //don't yet have newWayPoint fn!!!
                 this.props.newWaypoint(waypoint)
+                return "hello";
             })
-
+            this.props.history.push(`/routes/${route.id}`)
         })
     }
 
@@ -207,7 +210,7 @@ class Map extends React.Component{
 }
 
 
-export default Map;
+export default withRouter(Map);
 
 
 

@@ -10,6 +10,8 @@ const routesReducer = (state = {}, action) => {
     switch(action.type) {
         case NEW_ROUTE:
             return Object.assign({}, state, { [action.route.id]: action.route })
+        case RECEIVE_ROUTE:
+            return {[action.route.id]: action.route}
         default:
             return state
     }

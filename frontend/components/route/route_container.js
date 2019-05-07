@@ -1,20 +1,19 @@
 import Route from './route';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { receiveWaypoint } from '../../reducers/waypoints_reducer';
-
+import { fetchRoute } from '../../actions/route_actions';
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        route: state.entities.routes[ownProps.match.params.id]
-
+        route: state.entities.routes[ownProps.match.params.id],
+        routeToFetch: ownProps.match.params.id,
+        //might be wrong
+        waypoints: Object.values(state.entities.waypoints)
     });
 };
 
 const mapDispatchToProps = dispatch => ({
-    updateWaypoints: waypoint => dispatch(receiveWaypoint(waypoint)),
-    newRoute: route => dispatch(newRoute(route)),
-    newWaypoint: waypoint => dispatch(newWaypoint(waypoint))
+    fetchRoute: id => dispatch(fetchRoute(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Route);

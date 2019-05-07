@@ -7,8 +7,8 @@ export const waypointsReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_WAYPOINT:
             return Object.assign({}, state, { [action.waypoint.id]:action.waypoint })
-        // case RECEIVE_ROUTE:
-        //     return merge({}, action.waypoints)
+        case RECEIVE_ROUTE:
+            return (action.waypoints);
         default:
             return state;
     }

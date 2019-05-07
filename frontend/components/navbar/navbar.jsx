@@ -15,7 +15,7 @@ class Navbar extends React.Component {
 
             let navButtonID;
             let navButtonText;
-            let navButtonDestination;
+            let navButtonDestination = '/';
 
             if(this.props.currentURL === "/" || this.props.currentURL === "/feed"){
                 navButtonText = "Log In";
