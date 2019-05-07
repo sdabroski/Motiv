@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_30_213639) do
+ActiveRecord::Schema.define(version: 2019_05_06_230851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "routes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "time"
+    t.float "distance"
+    t.text "description"
+    t.string "name"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_routes_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "password_digest", null: false
@@ -30,6 +42,16 @@ ActiveRecord::Schema.define(version: 2019_04_30_213639) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
+  end
+
+  create_table "waypoints", force: :cascade do |t|
+    t.integer "route_id", null: false
+    t.integer "order", null: false
+    t.string "lat", null: false
+    t.string "lng", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_waypoints_on_route_id"
   end
 
 end

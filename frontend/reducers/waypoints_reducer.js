@@ -1,21 +1,16 @@
 import merge from 'lodash/merge';
+import {RECEIVE_WAYPOINT} from '../actions/waypoint_actions';
+import {RECEIVE_ROUTE} from '../actions/route_actions';
 
-export const waypointsReducer = (state = [], action) => {
+export const waypointsReducer = (state = {}, action) => {
     Object.freeze(state);
-    let newState;
     switch (action.type) {
         case RECEIVE_WAYPOINT:
-            newState = state.slice(0);
-            newState.push(action.waypoint);
-            return newState;
+            return Object.assign({}, state, { [action.waypoint.id]:action.waypoint })
+        // case RECEIVE_ROUTE:
+        //     return merge({}, action.waypoints)
         default:
             return state;
     }
 };
 
-export const RECEIVE_WAYPOINT = "RECEIVE_WAYPOINT";
-
-export const receiveWaypoint = waypoint => ({
-    type: RECEIVE_WAYPOINT,
-    waypoint
-});

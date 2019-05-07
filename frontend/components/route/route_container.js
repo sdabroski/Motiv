@@ -1,15 +1,13 @@
-import Map from './map';
+import Route from './route';
 import { connect } from 'react-redux';
-import merge from 'lodash/merge';
 import { withRouter } from 'react-router-dom';
-import {newRoute} from '../../actions/route_actions';
-import {newWaypoint} from '../../actions/waypoint_actions';
 import { receiveWaypoint } from '../../reducers/waypoints_reducer';
 
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        waypoints: state.entities.waypoints
+        route: state.entities.routes[ownProps.match.params.id]
+
     });
 };
 

@@ -15,8 +15,8 @@ export const login = user => dispatch => {
 
 export const signup = user => dispatch => (
     SessionApiUtil.signup(user)
-    .then(user => dispatch(receiveCurrentUser(user)),
-    errors => dispatch(receiveErrors(errors.responseJSON))
+        .then(user => dispatch(receiveCurrentUser(user)),
+            errors => dispatch(receiveErrors(errors.responseJSON))
     )
 );
 

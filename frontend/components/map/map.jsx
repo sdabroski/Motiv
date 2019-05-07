@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { newRoute } from '../../util/routes_api_util';
 
 
 class Map extends React.Component{
@@ -19,6 +20,23 @@ class Map extends React.Component{
 
     componentDidUpdate() {
         this.createMap();
+    }
+
+    handleSubmit(){
+        //create new Route
+        this.props.newRoute(this.state).then(route => {
+            
+            this.state.waypoints.forEach((waypoint, i) => {
+                
+                //sets a new key value pair for the waypoint using the route id we just created
+                waypoint.route_id = route.id;
+                waypoint.order = i;
+                // waypoint.lat = waypoint.
+                //don't yet have newWayPoint fn!!!
+                this.props.newWaypoint(waypoint)
+            })
+
+        })
     }
 
     componentDidMount() {
@@ -55,7 +73,7 @@ class Map extends React.Component{
     }
 
     routeStats(route) {
-        debugger
+
         let totalDistance = 0;
         let totalTime = 0;
         for (let i = 0; i < route.legs.length; i++) {
@@ -146,7 +164,7 @@ class Map extends React.Component{
 
             rawWaypoints.forEach(waypoint => {
                 formattedWaypoints.push({location: waypoint})
-                this.addMarker(waypoint, this.map)
+                // this.addMarker(waypoint, this.map)
             })
 
             let request = {
@@ -178,6 +196,7 @@ class Map extends React.Component{
                 <div>{`Distance:${this.state.distance}`}</div>
                 <br/>
                 <div>{`Time:${this.state.time}`}</div>
+                <button value="Save Route" onClick={() => this.handleSubmit()}>Submit</button>
             </div>
         );
     }
