@@ -6,14 +6,14 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
     return ({
-        waypoints: state.entities.waypoints
+        waypoints: ownProps.waypoints,
+        type: ownProps.type,
+        distance: ownProps.distance,
+        time: ownProps.time
     });
 };
 
 const mapDispatchToProps = dispatch => ({
-    updateWaypoints: waypoint => dispatch(receiveWaypoint(waypoint)),
-    newRoute: route => dispatch(newRoute(route)),
-    newWaypoint: waypoint => dispatch(newWaypoint(waypoint))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(MapIndexItem);

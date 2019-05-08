@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { newRoute } from '../../util/routes_api_util';
 import { withRouter } from 'react-router-dom';
-import MapIndexItem from '../../components/map_index_item/map_index_item';
+import MapIndexItemContainer from '../../components/map_index_item/map_index_item_container';
 
 
 class Route extends React.Component {
@@ -26,7 +26,7 @@ class Route extends React.Component {
                 <h1>{this.props.route.id}</h1>
                 <br/>
                 <br/>
-                <MapIndexItem 
+                <MapIndexItemContainer
                     waypoints={sortedWaypoints}
                     type={this.props.route.type}
                     distance={this.props.route.distance}

@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 2019_05_06_230851) do
   create_table "waypoints", force: :cascade do |t|
     t.integer "route_id", null: false
     t.integer "order", null: false
-    t.string "lat", null: false
-    t.string "lng", null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["route_id"], name: "index_waypoints_on_route_id"

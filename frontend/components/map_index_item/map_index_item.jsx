@@ -10,6 +10,10 @@ class MapIndexItem extends React.Component {
         this.createMap()
     }
 
+    componentDidUpdate(){
+        this.createMap()
+    }
+
     createMap() {
         // const mapDiv = ReactDOM.findDOMNode(this.refs.map)
         const mapDiv = ReactDOM.findDOMNode(this.refs.map)
@@ -40,7 +44,6 @@ class MapIndexItem extends React.Component {
                 formattedWaypoints.push({ location: {lat: waypoint.lat, lng: waypoint.lng} })
                 // this.addMarker(waypoint, this.map)
             })
-            debugger
             let request = {
                 origin: {lat: this.props.waypoints[0].lat, lng: this.props.waypoints[0].lng},
                 destination: 
