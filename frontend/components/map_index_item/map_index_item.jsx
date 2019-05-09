@@ -77,7 +77,7 @@ class MapIndexItem extends React.Component {
         } else if (this.props.which_page === "index"){
             return (
             
-                <div id="show-map" ref="map" />
+                <div id="index-map" ref="map" />
             
             )
 

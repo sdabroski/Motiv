@@ -1,0 +1,20 @@
+.map-index-super-container {
+    display: flex;
+    flex-flow: map;
+    width: 500px;
+    flex-direction: row;
+}
+
+#index-map {
+    width: 150px;
+    height: 100px;
+}
+
+.map-index-container {
+    width: 100px;
+}
+
+.index-map-itself {
+    width: 200px;
+}
+

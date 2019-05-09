@@ -28,7 +28,7 @@ const App = () => (
             <ProtectedRoute exact path = "/feed" component={FeedContainer} /> 
             <ProtectedRoute exact path="/routes/new" component={MapContainer} />
             <ProtectedRoute exact path="/routes/:id" component={RouteContainer} />
-            {/* <ProtectedRoute exact path="/routes" component={RouteIndexContainer} /> */}
+            <ProtectedRoute exact path="/routes" component={RouteIndexContainer} />
         </Switch>
     </div>
 );

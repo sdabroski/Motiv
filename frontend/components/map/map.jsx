@@ -39,10 +39,12 @@ class Map extends React.Component{
               
                 this.props.newWaypoint(waypoint)
             });
-            setTimeout(() => {}, 200)
+            
             return route
             
-        }).then((route) => this.props.history.push(`/routes/${route.id}`))
+        }).then((route) => {
+            setTimeout(() => { this.props.history.push(`/routes/${route.id}`) }, 1000)
+        })
     }
 
     componentDidMount() {
@@ -214,12 +216,12 @@ class Map extends React.Component{
                     </div>
                     <div className="new-route-navbar-right">
                         <label className="new-route-nav-element">
-                            <input type="radio" name="test" value="BICYCLING" defaultChecked/>
+                            <input type="radio" name="test" value="BICYCLING" defaultChecked onChange={this.update("workout_type")}/> 
                             <img src="https://image.flaticon.com/icons/svg/130/130276.svg" className="route-navbar-pic" />
                         </label>
 
                         <label className="new-route-nav-element">
-                            <input type="radio" name="test" value="WALKING" />
+                            <input type="radio" name="test" value="WALKING" onChange={this.update("workout_type")}/>
                             <img src="https://image.flaticon.com/icons/svg/37/37742.svg" className="route-navbar-pic" />
                         </label>
 
@@ -260,6 +262,8 @@ class Map extends React.Component{
             </div>
         );
     }
+
+    // 
 
  
 

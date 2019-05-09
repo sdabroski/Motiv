@@ -19,7 +19,6 @@ class Route extends React.Component {
         let sorted;
         let workoutTypeCapitalized;
 
-
         //iterate over routes, for each filter the waypoints, then pass those to mapindexcontainer
         //map outside here, actualy specify that it's the MapIndexItemContainer, pass in the necessary prop
         //save all those to a variable, and render the variable below.
@@ -30,13 +29,16 @@ class Route extends React.Component {
             workoutTypeCapitalized = route.workout_type.charAt(0).toUpperCase() + route.workout_type.slice(1).toLowerCase();
 
             return (
-                <div className="map-index-container">
-                    <MapIndexItemContainer
+                <div className="map-index-container" id={route.id}>
+                    <MapIndexItemContainer 
+                        key={route.id}
+                        className="index-map-itself"
                         waypoints={sorted}
                         type={route.type}
                         distance={route.distance}
                         time={route.time}
-                        workout_type={workoutTypeCapitalized}
+                        workout_type={route.workout_type}
+                        workoutTypeCapitalized={workoutTypeCapitalized}
                         which_page="index"
                     />
                 </div>
