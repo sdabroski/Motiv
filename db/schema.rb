@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_05_06_230851) do
     t.float "distance"
     t.text "description"
     t.string "name"
-    t.string "type"
+    t.string "workout_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_routes_on_user_id"

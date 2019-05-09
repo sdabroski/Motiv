@@ -12,3 +12,12 @@ export const fetchRoute = (id) => (
         url: `/api/routes/${id}`
     })
 )
+
+export const fetchAllRoutes = (id) => (
+    $.ajax({
+        method: "GET",
+        url: `/api/routes`
+    })
+)
+
+    

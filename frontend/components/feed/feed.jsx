@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+    Route,
+    Redirect,
+    Switch,
+    Link,
+    HashRouter
+} from 'react-router-dom';
 
 
 class Feed extends React.Component {
@@ -8,6 +15,7 @@ class Feed extends React.Component {
             <>
                 <h1> Welcome, {this.props.currentUser.email} </h1>
                 <button onClick={() => this.props.logout()}>Logout</button>
+                <Link to="/routes/new">Create Route</Link>
             </>
         );
     }

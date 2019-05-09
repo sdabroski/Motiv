@@ -17,18 +17,19 @@ class Api::RoutesController < ApplicationController
 
     def index
         @routes = current_user.routes.includes(:waypoints)
+        render "/routes/index"
     end
 
     private
 
     def route_params
         params.require(:route).permit(
-            :user_id,
             :time,
             :distance,
             :description,
             :name,
-            :type
+            :workout_type
+            # :waypoints
         )
     end
 

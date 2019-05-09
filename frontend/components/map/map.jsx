@@ -11,10 +11,11 @@ class Map extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            elevation: 0,
-            time: 0,
-            distance: 0,
+            time: 0.00,
+            distance: 0.00,
             waypoints: [],
+            name: "",
+            workout_type: "BICYCLING"
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.placeMarker = this.placeMarker.bind(this);
@@ -27,23 +28,31 @@ class Map extends React.Component{
     handleSubmit(){
         //create new Route
         this.props.newRoute(this.state).then(route => {
+
+            
             
             this.state.waypoints.map((waypoint, i) => {
                 
                 //sets a new key value pair for the waypoint using the route id we just created
                 waypoint.route_id = route.id;
                 waypoint.order = i;
-                // waypoint.lat = waypoint.
-                //don't yet have newWayPoint fn!!!
+              
                 this.props.newWaypoint(waypoint)
-                return "hello";
-            })
-            this.props.history.push(`/routes/${route.id}`)
-        })
+            });
+            setTimeout(() => {}, 200)
+            return route
+            
+        }).then((route) => this.props.history.push(`/routes/${route.id}`))
     }
 
     componentDidMount() {
         this.createMap();
+    }
+
+    update(field) {
+        return e => (
+            this.setState({ [field]: e.target.value })
+        );
     }
 
     addWaypoint(latLng, map) {
@@ -104,10 +113,6 @@ class Map extends React.Component{
 
         //presets for testing
         let haight = new google.maps.LatLng(37.7699298, -122.4469157);
-        // let oceanBeach = new google.maps.LatLng(37.7683909618184, -122.51089453697205);
-        // let appAcademy = new google.maps.LatLng(37.802566, -122.405186);
-        // let testWaypoint = { location: appAcademy }
-        //let testWaypoint2 = { location: {lat: 37.802566, lng: -122.405186}} this way works too :)
 
         //define original map orientation
         const mapOptions = {
@@ -175,7 +180,7 @@ class Map extends React.Component{
                 destination: this.state.waypoints[this.state.waypoints.length - 1],
                 optimizeWaypoints: false,
                 waypoints: formattedWaypoints,
-                travelMode: google.maps.TravelMode["BICYCLING"]
+                travelMode: google.maps.TravelMode[this.state.workout_type]
             };
     
             directionsService.route(request, (response, status) => {
@@ -193,13 +198,65 @@ class Map extends React.Component{
     render(){
         return (
             <div>
+                <div className="new-route-navbar">
+                    <div className="new-route-navbar-left">
+                        <div>
+                            <input
+                                type="text"
+                                value={this.state.name}
+                                placeholder="Route Name"
+                                onChange={this.update("name")}
+                                id="new-route-input-field"
+                            />
+                        </div>
+
+
+                    </div>
+                    <div className="new-route-navbar-right">
+                        <label className="new-route-nav-element">
+                            <input type="radio" name="test" value="BICYCLING" defaultChecked/>
+                            <img src="https://image.flaticon.com/icons/svg/130/130276.svg" className="route-navbar-pic" />
+                        </label>
+
+                        <label className="new-route-nav-element">
+                            <input type="radio" name="test" value="WALKING" />
+                            <img src="https://image.flaticon.com/icons/svg/37/37742.svg" className="route-navbar-pic" />
+                        </label>
+
+
+                        <button className="new-route-nav-element" value="Submit" id="route-submit-button" onClick={() => this.handleSubmit()}>Submit</button>
+                    </div>
+                </div>
+
                 <div id="map" ref="map"/>
-                <br/>
-                <br/>
-                <div>{`Distance:${this.state.distance}`}</div>
-                <br/>
-                <div>{`Time:${this.state.time}`}</div>
-                <button value="Save Route" onClick={() => this.handleSubmit()}>Submit</button>
+
+                <div className="new-route-navbar" id="bottom">
+                    <div className="new-route-navbar-left">
+
+
+                        <div className="map-data-container">
+                            <div className="map-data-item">
+                                {`${(this.state.distance / 1609.344).toFixed(2)} mi`}
+                            </div>
+                            <div className="map-data-label">
+                                Distance
+                            </div>
+                        </div>
+                        {/* <div className="map-data-container">
+                            
+                        </div> */}
+                        <div className="map-data-container">
+                            <div className="map-data-item">
+                                {`${(this.state.time / 60).toFixed(0)} mins`}
+                            </div>
+                            <div className="map-data-label">
+                                Est. Moving Time
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
             </div>
         );
     }

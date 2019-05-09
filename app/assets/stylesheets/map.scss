@@ -1,4 +1,120 @@
 #map {
-    height: 500px;
-    width: 500px;
+    height: 79vh;
+    width: 100vw;
+}
+
+.new-route-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    text-align: center;
+    height: 55px;
+    border-bottom: 1px solid #e6e6eb;
+    background: #F1F1F1;
+    // flex-wrap: wrap;
+}
+
+#new-route-input-field{
+    height: 40px;
+    padding-left: 10px;
+}
+
+#bottom {
+    height: 62px;
+}
+
+.new-route-navbar-left {
+    justify-self: left;
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-route-navbar-right {
+    justify-self: right;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-right: 100px;
+}
+
+.new-route-nav-element {
+    display: flex;
+    align-content: center;
+    margin-left: 27px;
+}
+
+.route-navbar-pic {
+    width: 100px;
+}
+
+.new-route-navbar-button {
+    height: 28px;
+    width: 69px;
+    background: white;
+    cursor: pointer;
+    padding: 6px 16px;
+    border: 1px solid #ccccd1;
+    border-radius: 4px;
+    text-decoration: none;
+    align-self: center;
+    font-size: 14px;
+    font-family: $strava-fonts;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-data-container {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 27px;
+
+}
+
+.map-data-item {
+    font-family: $strava-fonts;
+    font-size: 22px;
+    color: #333333;
+}
+
+.map-data-label {
+    font-family: $strava-fonts;
+    font-size: 12px;
+    color: #666;
+}
+
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  border-bottom: 3px solid $orange;
+  border-radius: 4px;
+}
+
+#route-submit-button {
+    background-color: $orange;
+    font-family: $strava-fonts;
+    font-size: 14px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    
+    
 }

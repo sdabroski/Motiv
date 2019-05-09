@@ -53,7 +53,7 @@ class MapIndexItem extends React.Component {
                     },
                 optimizeWaypoints: false,
                 waypoints: formattedWaypoints,
-                travelMode: google.maps.TravelMode["BICYCLING"]
+                travelMode: google.maps.TravelMode[this.props.workout_type]
             };
 
 
@@ -68,16 +68,20 @@ class MapIndexItem extends React.Component {
     
 
     render() {
-        return (
-            <div>
-                <div id="map" ref="map" />
-                <br />
-                <br />
-                <div>{`Distance:${this.props.distance}`}</div>
-                <br />
-                <div>{`Time:${this.props.time}`}</div>
-            </div>
-        );
+
+        if(this.props.which_page==="show"){
+            return (
+                    <div id="show-map" ref="map" />
+                   
+            );
+        } else if (this.props.which_page === "index"){
+            return (
+            
+                <div id="show-map" ref="map" />
+            
+            )
+
+        }
     }
 
 

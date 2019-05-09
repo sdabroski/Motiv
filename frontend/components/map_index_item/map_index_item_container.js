@@ -7,9 +7,11 @@ import { withRouter } from 'react-router-dom';
 const mapStateToProps = (state, ownProps) => {
     return ({
         waypoints: ownProps.waypoints,
-        type: ownProps.type,
+        workout_type: ownProps.workout_type,
         distance: ownProps.distance,
-        time: ownProps.time
+        time: ownProps.time,
+        which_page: ownProps.which_page
+        
     });
 };
 

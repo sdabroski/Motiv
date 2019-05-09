@@ -10,7 +10,10 @@
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyCN8Wsp5NgLfN-3DXaTQEwOPytC86qf7rE&libraries=drawing" %>
 
     <script type="text/javascript">
-      window.motiv = "<%= image_url('motiv.png') %>"
+    window.images = {
+      motiv: "<%= image_url('motiv.png') %>",
+    }
+
     </script>
   </head>
 

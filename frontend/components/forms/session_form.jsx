@@ -19,14 +19,18 @@ class SessionForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
         this.props.processForm(this.state)
-        // .then((user) => {
-        //     if(user.id){
-        //         this.props.history.push('/feed'))
-        //     }
+        .then(
+            () => {
+                this.props.history.push('/feed')
+            }
+
+            // (currentUser) => {
+            // if (currentUser.id) this.props.history.push('/feed')
         // }
+        )
     }
 
-    demoLogin(){
+    demoLogin(e){
         let demoState = {
             email: "stefan@wave.com",
             password: "password",
@@ -34,6 +38,11 @@ class SessionForm extends React.Component {
             last_name: "Dabroski"
         };
         this.props.demoSubmit(demoState)
+            .then(
+                () => {
+                    this.props.history.push('/feed')
+                }
+            )
     }
 
     update(field){

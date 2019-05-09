@@ -1,5 +1,5 @@
 json.route do
-    json.extract! @route, :id, :time, :distance, :description, :name, :type, :user_id
+    json.extract! @route, :id, :time, :distance, :description, :name, :workout_type, :user_id
 end
 
 json.waypoints do
