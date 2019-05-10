@@ -19,6 +19,11 @@ class Splash extends React.Component{
             last_name: "Dabroski"
         };
         this.props.demoSubmit(demoState)
+            .then(
+                () => {
+                    this.props.history.push('/routes')
+                }
+            )
     }
 
 
