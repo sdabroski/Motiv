@@ -40,7 +40,7 @@ class SessionForm extends React.Component {
         this.props.demoSubmit(demoState)
             .then(
                 () => {
-                    this.props.history.push('/feed')
+                    this.props.history.push('/routes')
                 }
             )
     }
