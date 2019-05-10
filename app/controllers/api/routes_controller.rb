@@ -20,6 +20,12 @@ class Api::RoutesController < ApplicationController
         render "/routes/index"
     end
 
+    def destroy
+        @route = Route.find(params[:id])
+        @route.destroy
+        render json: @route
+    end
+
     private
 
     def route_params

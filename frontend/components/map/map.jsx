@@ -15,8 +15,10 @@ class Map extends React.Component{
             distance: 0.00,
             waypoints: [],
             name: "",
-            workout_type: "BICYCLING"
+            workout_type: "BICYCLING",
+            err: ""
         }
+       
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.placeMarker = this.placeMarker.bind(this);
     }
@@ -27,10 +29,18 @@ class Map extends React.Component{
 
     handleSubmit(){
         //create new Route
-        this.props.newRoute(this.state).then(route => {
 
-            
-            
+        if(this.state.waypoints.length < 2){
+            this.setState({ err: "You must select at least 2 waypoints"});
+            return
+        } 
+        if(this.state.name === ""){
+            this.setState({ err: "You must select a route name"});
+            return
+        }
+
+
+        this.props.newRoute(this.state).then(route => {
             this.state.waypoints.map((waypoint, i) => {
                 
                 //sets a new key value pair for the waypoint using the route id we just created
@@ -93,6 +103,8 @@ class Map extends React.Component{
         for (let i = 0; i < route.legs.length; i++) {
             totalDistance += route.legs[i].distance.value;
             totalTime += route.legs[i].duration.value;
+            if (this.state.workout_type === "WALKING") totalTime /= 1.3;
+            
         }
 
         if(this.state.time !== totalTime || this.state.distance !== totalDistance){
@@ -198,6 +210,7 @@ class Map extends React.Component{
     }
     
     render(){
+
         return (
             <div>
                 <div className="new-route-navbar">
@@ -210,9 +223,11 @@ class Map extends React.Component{
                                 onChange={this.update("name")}
                                 id="new-route-input-field"
                             />
+                           
                         </div>
-
-
+                    </div>
+                    <div id="route-error-container">
+                        {this.state.err}
                     </div>
                     <div className="new-route-navbar-right">
                         <label className="new-route-nav-element">

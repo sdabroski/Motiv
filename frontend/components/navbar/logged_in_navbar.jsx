@@ -32,7 +32,7 @@ class LoggedInNavbar extends React.Component {
                     </div>
 
                     <NavLink to='/feed' className="logged-in-link" activeClassName='is-active'>Feed</NavLink>
-                    <NavLink to='/routes/new' className="logged-in-link" activeClassName='is-active' >Routes</NavLink>
+                    <NavLink to='/routes/' className="logged-in-link" activeClassName='is-active' >Routes</NavLink>
                     <NavLink to='/workouts' className="logged-in-link" activeClassName='is-active'>Workouts</NavLink>
 
 

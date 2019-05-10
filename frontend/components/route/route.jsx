@@ -15,10 +15,22 @@ class Route extends React.Component {
     // componentDidUpdate(){
     //     this.props.fetchRoute(this.props.route.id)
     // }
+
+    deleteAndRedirect(){
+        this.props.deleteRoute(this.props.route.id)
+        // .then(this.props.history.push(`/routes`))
+        .then(
+            setTimeout(() => { this.props.history.push(`/routes`) }, 1000)
+        )
+    }
     
     render() {
         if(!this.props.route || !this.props.waypoints) return null
         let sortedWaypoints = this.props.waypoints.sort((a, b) => a.order - b.order)
+
+        let workoutDisplayType;
+        if(this.props.route.workout_type === "WALKING") workoutDisplayType = "Run";
+        if(this.props.route.workout_type === "BICYCLING") workoutDisplayType = "Cycle";
 
         const workoutTypeCapitalized = this.props.route.workout_type.charAt(0).toUpperCase() + this.props.route.workout_type.slice(1).toLowerCase();
 
@@ -28,14 +40,30 @@ class Route extends React.Component {
         //save all those to a variable, and render the variable below.
         
         
+        
+        
         return (
             <> 
-                <div id="route-title">{this.props.route.name}</div>
-                
-                <div>
-
-
+                <div id="rs-top-container">
+                    <div id="route-title">{this.props.route.name}</div>
+                    <div id="rs-top-nav">
+                        <div className="navbar-button" id="rs-delete-button">
+                            <button 
+                                onClick={() => this.deleteAndRedirect()} 
+                                >
+                                Delete
+                            </button>
+                        </div>
+                        <Link
+                            to="/routes"
+                            className="navbar-button"
+                            id="rs-save-button">
+                            Save
+                        </Link>
+                    </div>
                 </div>
+                
+            
                 
                 <div id="route-show-bottom-container">
                     <div id="route-map-holder">
@@ -51,7 +79,7 @@ class Route extends React.Component {
                     <div id="rs-super-data-container">
                         <div className="rs-map-data-container">
                             <div className="rs-map-data-item">
-                                {`${this.props.route.distance} mi`}
+                                {`${(this.props.route.distance / 1609.344).toFixed(2)} mi`}
                             </div>
                             <div className="rs-map-data-label">
                                 Distance
@@ -69,7 +97,7 @@ class Route extends React.Component {
 
                         <div className="rs-map-data-container">
                             <div className="rs-map-data-item">
-                                {workoutTypeCapitalized}
+                                {workoutDisplayType}
                             </div>
                             <div className="rs-map-data-label">
                                 Route Type

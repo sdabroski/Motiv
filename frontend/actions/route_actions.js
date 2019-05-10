@@ -24,6 +24,10 @@ export const fetchAllRoutes = () => dispatch => (
     .then(payload => dispatch(receiveRoutes(payload)))
 )
 
+export const deleteRoute = (id) => dispatch => (
+    RouteApiUtil.deleteRoute(id)
+)
+
 const receiveRoute = ({route, waypoints}) => ({
     type: RECEIVE_ROUTE,
     route: route,

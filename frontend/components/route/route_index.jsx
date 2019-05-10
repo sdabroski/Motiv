@@ -26,10 +26,16 @@ class Route extends React.Component {
         const routesToRender = this.props.routes.map(route => {
             filtered = this.props.waypoints.filter(waypoint => waypoint.route_id === route.id)
             sorted = filtered.sort((a, b) => a.order - b.order)
-            workoutTypeCapitalized = route.workout_type.charAt(0).toUpperCase() + route.workout_type.slice(1).toLowerCase();
+
+            let workoutDisplayType;
+            if (route.workout_type === "WALKING") workoutDisplayType = "Run";
+            if (route.workout_type === "BICYCLING") workoutDisplayType = "Cycle";
+            
 
             return (
                 <div className="map-index-container" id={route.id}>
+
+                   
                     <MapIndexItemContainer 
                         key={route.id}
                         className="index-map-itself"
@@ -41,15 +47,66 @@ class Route extends React.Component {
                         workoutTypeCapitalized={workoutTypeCapitalized}
                         which_page="index"
                     />
+                    <div className="map-index-data-container">
+                        <Link to={`/routes/${route.id}`} className="index-route-name">{route.name}</Link>
+
+                        <div id="index-sub-data-container">
+                            <div className="ri-map-data-container">
+                                <div className="ri-map-data-item">
+                                    {`${(route.distance / 1609.344).toFixed(2)} mi`}
+                                </div>
+                                <div className="rs-map-data-label">
+                                    Distance
+                            </div>
+                            </div>
+
+                            <div className="ri-map-data-container">
+                                <div className="ri-map-data-item">
+                                    {`${(route.time / 60).toFixed(0)} mins`}
+                                </div>
+                                <div className="rs-map-data-label">
+                                    Est. Moving Time
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="ri2-map-data-container">
+                            <div className="ri2-map-data-label">
+                                Route Type
+                            </div>
+                            <div className="rs-map-data-item">
+                                {workoutDisplayType}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             )
         })
 
 
         return (
-           <div className="map-index-super-container">
-               {routesToRender}
-           </div>
+            <>
+                <div id="ri-header-container">
+                    <div id="ri-header-left">
+                        <div id="ri-page-label">My Routes</div>
+                        <Link to="/routes/new" id="ri-new-route-link">
+                            Create New Route
+                        </Link>
+                    </div>
+                    <div id="ri-header-right">
+                        <div id="header-paragraph">
+                            Learn more about sharing<br/> and
+                            exporting routes to a<br/> variety of devices.
+                        </div>
+                        <img src="https://bit.ly/2Vc570D"/>
+                    </div>
+
+                </div>
+                <div className="map-index-super-container">
+                    {routesToRender}
+                </div>
+            </>
         )
     }
 }

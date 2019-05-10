@@ -21,7 +21,7 @@ class SessionForm extends React.Component {
         this.props.processForm(this.state)
         .then(
             () => {
-                this.props.history.push('/feed')
+                this.props.history.push('/routes')
             }
 
             // (currentUser) => {

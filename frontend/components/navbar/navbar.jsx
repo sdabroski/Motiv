@@ -17,7 +17,6 @@ class Navbar extends React.Component {
             return (
                 <LoggedOutNavbar
                     currentURL={this.props.currentURL}
-                    logout={logout}
                 />
             )
         }

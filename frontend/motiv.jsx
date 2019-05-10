@@ -4,9 +4,9 @@ import * as SessionApiUtil from './util/session_api_util';
 import configureStore from './store/store';
 import Root from './components/root';
 import { login } from './actions/session_actions';
-import { newRoute, fetchRoute, fetchAllRoutes} from './actions/route_actions';
+import { newRoute, fetchRoute, fetchAllRoutes, deleteRoute} from './actions/route_actions';
 import { newWaypoint } from './actions/waypoint_actions';
-// import {fetchAllRoutes} from './util/routes_api_util';
+// import {} from './util/routes_api_util';
 
 
 
@@ -39,4 +39,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatch = store.dispatch;
     window.fetchRoute = fetchRoute;
     window.fetchAllRoutes = fetchAllRoutes;
+    window.deleteRoute = deleteRoute;
 });
